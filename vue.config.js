@@ -1,4 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
+console.log(process.env)
 module.exports = defineConfig({
   transpileDependencies: true,
   /**关闭保存时代码格式化校验*/
@@ -23,16 +24,16 @@ module.exports = defineConfig({
     open: true,
     /**代理proxy*/
     proxy: {
-      '/api': {
+      [process.env.VUE_APP_IDENT]: {
         /**配置代理默认代理方式*/
         changeOrigin: true,
         /**如果是http接口，需要配置该参数*/
         secure: false,
         /**配置代理路径*/
-        target: 'https://ihrm-java.itheima.net/api',
+        target: process.env.VUE_APP_URL,
         /**路径重写*/
         pathRewrite: {
-          '^/api': ''
+          ['^' + process.env.VUE_APP_IDENT]: ''
         }
       }
     }
