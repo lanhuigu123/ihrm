@@ -3,12 +3,23 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import http from './utils/httpRequest'
-import { Button, Select, MessageBox, Message } from 'element-ui'
+import {
+  Button,
+  Select,
+  MessageBox,
+  Message,
+  Form,
+  FormItem,
+  Input
+} from 'element-ui'
 
 Vue.config.productionTip = false
 
 Vue.use(Button)
 Vue.use(Select)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Input)
 
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$msg = Message

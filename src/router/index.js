@@ -37,7 +37,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   let token = getToken()
-  if (token) {
+  if (token && token !== null) {
     if (to.path == '/login') {
       next('/')
     } else {
