@@ -10,9 +10,9 @@
     "build:dev": "vue-cli-service build --mode development",
     "build:test": "vue-cli-service build --mode test",
     "lint": "vue-cli-service lint",
-    "prettier": "prettier --write.",
+    "prettier": "prettier --write .",
     "prepare": "husky install",
-    "lint-staged": "lint-staged",
+    "pre-commit": "lint-staged",
     "commit": "cz"
   },
   "lint-staged": {
@@ -26,6 +26,7 @@
     "axios": "^1.6.2",
     "core-js": "^3.8.3",
     "element-ui": "^2.15.14",
+    "js-cookie": "^3.0.5",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"
@@ -48,7 +49,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^8.0.3",
     "husky": "^8.0.3",
-    "lint-staged": "^11.1.2",
+    "lint-staged": "^11.2.6",
     "prettier": "2.8.8",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",

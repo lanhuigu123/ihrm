@@ -23,6 +23,9 @@ let loadingInstance
 import axios from 'axios'
 import { MessageBox, Loading } from 'element-ui'
 import DEFAULTSTATUS from './default'
+import { getToken, removeToken } from './auth'
+import router from '../router'
+
 const instance = axios.create({
   // 根路径 基准地址
   baseURL: '',
@@ -41,7 +44,7 @@ instance.interceptors.request.use(
     /**
      * TODO: 封装token
      */
-
+    config.headers.Authorization = 'Bearer ' + getToken()
     loadingInstance = Loading.service({ fullscreen: true, text: '加载中...' })
 
     return config
@@ -53,17 +56,13 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     loadingInstance.close()
-    if (response.data && response.data.status === 2) {
-      // 401, token失效
-      /**
-       * TODO: 401用户登录
-       */
-      //  // resetLoginInfo()
-      //   router.push({
-      //     name: "login"
-      //   })
+    if (response.data && response.data.code === 10002) {
+      removeToken()
+      router.push({
+        name: 'Login'
+      })
     }
-    return response
+    return response.data
   },
   (error) => {
     let title = ''
