@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { getToken } from '@/utils/auth'
 
 Vue.use(VueRouter)
 
@@ -32,6 +33,23 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  let token = getToken()
+  if (token) {
+    if (to.path == '/login') {
+      next('/')
+    } else {
+      next()
+    }
+  } else {
+    if (to.path == '/login') {
+      next()
+    } else {
+      next('/login')
+    }
+  }
 })
 
 export default router

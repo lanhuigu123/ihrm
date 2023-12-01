@@ -12,7 +12,7 @@ export default {
     return {}
   },
   created() {
-    this.getLogin()
+    // this.getLogin()
   },
   mounted() {},
   methods: {
