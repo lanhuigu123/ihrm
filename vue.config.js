@@ -1,4 +1,14 @@
 const { defineConfig } = require('@vue/cli-service')
+const path = require('path')
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
+const target =
+  process.env.VUE_APP_TARGETFLAG == 'true'
+    ? process.env.VUE_APP_MOCKURL
+    : process.env.VUE_APP_URL
+
+console.log(process.env.VUE_APP_TARGETFLAG == 'true')
 module.exports = defineConfig({
   transpileDependencies: true,
   /**关闭保存时代码格式化校验*/
@@ -20,7 +30,7 @@ module.exports = defineConfig({
     /**关闭网络安全校验*/
     https: false,
     /**是否自动打开浏览器*/
-    open: true,
+    open: false,
     /**代理proxy*/
     proxy: {
       [process.env.VUE_APP_IDENT]: {
@@ -29,12 +39,38 @@ module.exports = defineConfig({
         /**如果是http接口，需要配置该参数*/
         secure: false,
         /**配置代理路径*/
-        target: process.env.VUE_APP_URL,
+        target,
         /**路径重写*/
         pathRewrite: {
           ['^' + process.env.VUE_APP_IDENT]: ''
         }
       }
     }
+  },
+  chainWebpack(config) {
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .loader('vue-loader')
+      .tap((options) => {
+        options.compilerOptions.preserveWhitespace = true
+        return options
+      })
+      .end()
+
+    config.plugins.delete('prefetch')
+    // set svg-sprite-loader
+    config.module.rule('svg').exclude.add(resolve('src/icons')).end()
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('src/icons'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
+      .end()
   }
 })

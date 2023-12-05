@@ -6,6 +6,7 @@
       </h3>
       <el-form :model="formLabelAlign">
         <el-form-item>
+          <!-- <svg-icon icon-class="yonghu"></svg-icon> -->
           <el-input
             @input="log"
             prefix-icon="el-icon-user-solid"
@@ -13,6 +14,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
+          <!-- <svg-icon icon-class="mima"></svg-icon> -->
           <el-input
             prefix-icon="el-icon-lock"
             v-model="formLabelAlign.password"
@@ -35,6 +37,7 @@
 
 <script>
 import { setToken } from '@/utils/auth'
+import * as API from '../api'
 export default {
   components: {},
   data() {
@@ -49,27 +52,29 @@ export default {
   mounted() {},
   methods: {
     handlerLogin() {
-      this.$http
-        .post(this.$http.addURL('/sys/login'), {
-          mobile: this.formLabelAlign.mobile,
-          password: this.formLabelAlign.password
-        })
-        .then((res) => {
-          console.log(res)
-          if (res.success) {
-            setToken(res.data)
-            this.$msg({
-              type: 'success',
-              message: res.message
-            })
-            this.$router.push('/')
-          } else {
-            this.$msg({
-              type: 'error',
-              message: res.message
-            })
-          }
-        })
+      API.loginApi({
+        mobile: this.formLabelAlign.mobile,
+        password: this.formLabelAlign.password
+      }).then((res) => {
+        console.log(res)
+        if (res.success) {
+          setToken(res.data)
+          // this.$msg({
+          //   type: 'success',
+          //   message: res.message
+          // })
+          this.$notify({
+            message: res.message,
+            type: 'success'
+          })
+          this.$router.push('/')
+        } else {
+          this.$msg({
+            type: 'error',
+            message: res.message
+          })
+        }
+      })
     },
     log() {
       console.log(this.formLabelAlign.mobile)

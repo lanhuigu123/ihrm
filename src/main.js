@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import http from './utils/httpRequest'
+import '@/icons'
 import {
   Button,
   Select,
@@ -18,7 +19,13 @@ import {
   Menu,
   Submenu,
   MenuItem,
-  MenuItemGroup
+  MenuItemGroup,
+  Tree,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  Notification,
+  Calendar
 } from 'element-ui'
 
 Vue.config.productionTip = false
@@ -36,6 +43,11 @@ Vue.use(Menu)
 Vue.use(Submenu)
 Vue.use(MenuItem)
 Vue.use(MenuItemGroup)
+Vue.use(Tree)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Calendar)
 
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$msg = Message
@@ -43,6 +55,7 @@ Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$prompt = MessageBox.prompt
 Vue.prototype.$http = http
+Vue.prototype.$notify = Notification
 
 new Vue({
   router,

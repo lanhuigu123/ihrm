@@ -13,13 +13,18 @@
     "prettier": "prettier --write .",
     "prepare": "husky install",
     "pre-commit": "lint-staged",
-    "commit": "cz"
+    "commit": "cz",
+    "nodemon": "nodemon ./mock/serve.js"
   },
   "dependencies": {
     "axios": "^1.6.2",
     "core-js": "^3.8.3",
     "element-ui": "^2.15.14",
+    "express": "^4.18.2",
     "js-cookie": "^3.0.5",
+    "mockjs": "^1.1.0",
+    "nodemon": "^3.0.2",
+    "svg-sprite-loader": "^6.0.11",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"
