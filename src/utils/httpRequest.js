@@ -76,6 +76,10 @@ instance.interceptors.response.use(
       /**后端返回的报错的信息 */
       message = error.response.data.message
       // 401, token失效
+      if (error.response.status === 401) {
+        removeToken()
+        router.push('/login')
+      }
       switch (
         error.response.status // 跨域存在获取到的状态码的情况, status(随后端定义变化而变化,code)
       ) {

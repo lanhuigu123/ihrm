@@ -64,8 +64,10 @@ export default {
           //   message: res.message
           // })
           this.$notify({
+            title: '提示',
             message: res.message,
-            type: 'success'
+            type: 'success',
+            duration: 2000
           })
           this.$router.push('/')
         } else {

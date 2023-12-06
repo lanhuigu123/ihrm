@@ -25,7 +25,11 @@ import {
   DropdownMenu,
   DropdownItem,
   Notification,
-  Calendar
+  Calendar,
+  Dialog,
+  Option,
+  OptionGroup,
+  Tooltip
 } from 'element-ui'
 
 Vue.config.productionTip = false
@@ -48,6 +52,11 @@ Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Calendar)
+Vue.use(Dialog)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(OptionGroup)
+Vue.use(Tooltip)
 
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$msg = Message
