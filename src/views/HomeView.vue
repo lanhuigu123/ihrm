@@ -11,7 +11,7 @@
           :collapse="isCollapse"
           :default-active="$route.path"
           class="el-menu-vertical-demo"
-          background-color="#2063fa"
+          background-color="transparent"
           text-color="#fff"
           active-text-color="#fff"
         >
@@ -111,7 +111,7 @@
               </div>
             </div>
           </el-header>
-          <el-main>
+          <el-main v-loading="true">
             <div class="bread"></div>
             <div class="view">
               <router-view />
@@ -144,14 +144,15 @@ export default {
 }
 .el-aside {
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0);
-  background-image: url('../../public/背景.png');
+  background: url('../assets/leftnavBg.png') no-repeat 0 100%,
+    -webkit-linear-gradient(bottom, #409eff, #4879fb);
   background-color: 100vw 100vh;
   background-repeat: no-repeat;
   overflow: hidden;
+
   div {
     margin: auto;
-    width: 80%;
+    width: 70%;
     height: 60px;
     img {
       width: 100%;
@@ -160,6 +161,20 @@ export default {
   }
   .el-menu {
     width: 101%;
+    .el-menu-item {
+      vertical-align: middle;
+      font-size: 16px;
+      i {
+        display: inline-block !important;
+        margin-right: 10px !important;
+      }
+    }
+    .el-menu-item:hover {
+      color: #4879fb !important;
+      i {
+        color: #4879fb !important;
+      }
+    }
   }
 }
 .el-header {

@@ -45,7 +45,11 @@ instance.interceptors.request.use(
      * TODO: 封装token
      */
     config.headers.Authorization = 'Bearer ' + getToken()
-    loadingInstance = Loading.service({ fullscreen: true, text: '加载中...' })
+    loadingInstance = Loading.service({
+      fullscreen: false,
+      text: '加载中...',
+      target: '.el-main'
+    })
 
     return config
   },
