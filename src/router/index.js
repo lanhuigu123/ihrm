@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../layout/index.vue'
 import { getToken } from '@/utils/auth'
 
 Vue.use(VueRouter)
@@ -15,12 +15,33 @@ const routes = [
       {
         path: 'dashboard',
         name: 'Dashboard',
-        component: () => import('../views/ChildView/dashboard.vue')
+        component: () => import('../views/ChildView/dashboard/dashboard.vue')
       },
       {
         path: 'departments',
         name: 'Departments',
-        component: () => import('../views/ChildView/departments.vue')
+        component: () =>
+          import('../views/ChildView/departments/departments.vue')
+      },
+      {
+        path: 'employees',
+        name: 'Employees',
+        component: () => import('../views/ChildView/employees/employees.vue')
+      },
+      {
+        path: 'setting',
+        name: 'Setting',
+        component: () => import('../views/ChildView/setting/setting.vue')
+      },
+      {
+        path: 'view',
+        name: 'View',
+        component: () => import('../views/ChildView/view/view.vue')
+      },
+      {
+        path: 'permission',
+        name: 'Permission',
+        component: () => import('../views/ChildView/permission/permission.vue')
       }
     ] // 重定向:重新指向其它path,会改变网址
   },

@@ -3,6 +3,17 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import http from './utils/httpRequest'
+// import './styles/element-variables.scss'
+// import VueI18n from 'vue-i18n'
+//引入element处理语言
+import ElementLocale from 'element-ui/lib/locale'
+
+// 引入我们实例化后vue-i18
+import i18n from './language/index'
+//将我们实例化的vue-i8编写公共方法,绑定要elementui语言上
+ElementLocale.i18n((key, value) => i18n.t(key, value))
+// 把i18注册到Vue实例上
+
 import '@/icons'
 import {
   Button,
@@ -29,7 +40,17 @@ import {
   Dialog,
   Option,
   OptionGroup,
-  Tooltip
+  Tooltip,
+  Table,
+  TableColumn,
+  Row,
+  Col,
+  Card,
+  Tabs,
+  TabPane,
+  Pagination,
+  Switch,
+  Image
 } from 'element-ui'
 
 Vue.config.productionTip = false
@@ -57,6 +78,16 @@ Vue.use(Select)
 Vue.use(Option)
 Vue.use(OptionGroup)
 Vue.use(Tooltip)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Card)
+Vue.use(Tabs)
+Vue.use(TabPane)
+Vue.use(Pagination)
+Vue.use(Switch)
+Vue.use(Image)
 
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$msg = Message
@@ -69,5 +100,6 @@ Vue.prototype.$notify = Notification
 new Vue({
   router,
   store,
+  i18n,
   render: (h) => h(App)
 }).$mount('#app')

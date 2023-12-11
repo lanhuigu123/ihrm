@@ -70,7 +70,7 @@ export default {
   methods: {
     /**添加打开弹框*/
     addOpen(id) {
-      this.getRole()
+      this.getUser()
       let dialog = this.$refs.dialog
       dialog.title = '新增部门'
       dialog.form = {}
@@ -82,11 +82,11 @@ export default {
     editOpen(id) {
       this.$refs.dialog.title = '编辑部门'
       this.$refs.dialog.dialogFormVisible = true
+
       API.detailDepartApi({
         id: id
       }).then((res) => {
         console.log(res.data)
-        this.getRole()
         this.$refs.dialog.form = res.data
       })
     },
@@ -135,6 +135,7 @@ export default {
       list.forEach((item) => {
         if (item.pid === id) {
           const children = this.tranListToTreeData(list, item.id)
+          console.log(children)
           if (!item.children) {
             item.children = children
           }
@@ -145,8 +146,8 @@ export default {
     },
 
     /**获取角色列表*/
-    getRole() {
-      API.getRoleApi().then((res) => {
+    getUser() {
+      API.getUserApi().then((res) => {
         console.log(res)
         if (res.success) {
           this.roleList = res.data
