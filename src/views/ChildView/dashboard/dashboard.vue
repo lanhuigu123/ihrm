@@ -20,6 +20,7 @@
         <el-card shadow>
           <el-calendar v-model="dateValue"> </el-calendar>
         </el-card>
+        <el-card shadow class=""> </el-card>
       </el-col>
       <el-col :span="11">
         <el-card shadow>
@@ -33,8 +34,9 @@
             </div>
           </div>
         </el-card>
-        <el-card shadow style="margin-top: 10px">
-          <div id="echarts">123</div>
+        <el-card shadow class="echarts" style="margin-top: 10px">
+          <div class="title">绩效指数</div>
+          <div id="echartsBox"></div>
         </el-card>
       </el-col>
     </el-row>
@@ -49,16 +51,16 @@ export default {
   components: {},
   data() {
     return {
-      data: {
-        dateValue: new Date()
-      }
+      data: {},
+      dateValue: new Date()
     }
   },
   created() {
     // this.getUser()
+  },
+  mounted() {
     this.initChart()
   },
-  mounted() {},
   methods: {
     getUser() {
       API.getUserInfoApi().then((res) => {
@@ -75,16 +77,14 @@ export default {
       })
     },
     initChart() {
-      var chartDom = document.getElementById('echarts')
+      var chartDom = document.getElementById('echartsBox')
+      console.log(chartDom)
       var myChart = echarts.init(chartDom)
       var option
 
       option = {
         title: {
-          text: 'Basic Radar Chart'
-        },
-        legend: {
-          data: ['Allocated Budget', 'Actual Spending']
+          text: '人力资源基础绩效表'
         },
         radar: {
           // shape: 'circle',
@@ -115,7 +115,7 @@ export default {
         ]
       }
 
-      option && myChart.setOption(option)
+      myChart.setOption(option)
     }
   }
 }
@@ -151,8 +151,16 @@ export default {
     margin-top: 20px;
   }
 }
-#echart {
+#echartsBox {
+  margin-top: 20px;
   width: 100%;
-  height: 300px;
+  height: 500px;
+}
+.echarts {
+  .title {
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid #ebeef5;
+    font-size: 24px;
+  }
 }
 </style>
