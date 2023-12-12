@@ -17,41 +17,13 @@
       text-color="#fff"
       active-text-color="#fff"
     >
-      <el-menu-item index="dashboard">
-        <svg-icon icon-class="home"></svg-icon>
-        <span slot="title">首页</span>
-      </el-menu-item>
-      <el-menu-item index="employees">
-        <svg-icon icon-class="people"></svg-icon>
-        <span slot="title">员工</span>
-      </el-menu-item>
-      <el-menu-item index="setting">
-        <svg-icon icon-class="settings"></svg-icon>
-        <span slot="title">公司设置</span>
-      </el-menu-item>
-      <el-menu-item index="permission">
-        <svg-icon icon-class="post"></svg-icon>
-        <span slot="title">权限管理</span>
-      </el-menu-item>
-      <el-menu-item index="social_securitys">
-        <svg-icon icon-class="text"></svg-icon>
-        <span slot="title">社保</span>
-      </el-menu-item>
-      <el-menu-item index="approvals">
-        <svg-icon icon-class="edit"></svg-icon>
-        <span slot="title">审批</span>
-      </el-menu-item>
-      <el-menu-item index="attendances">
-        <svg-icon icon-class="copy"></svg-icon>
-        <span slot="title">考勤</span>
-      </el-menu-item>
-      <el-menu-item index="salarys">
-        <svg-icon icon-class="pay"></svg-icon>
-        <span slot="title">工资</span>
-      </el-menu-item>
-      <el-menu-item index="departments">
-        <svg-icon icon-class="sortlight"></svg-icon>
-        <span slot="title">组织架构</span>
+      <el-menu-item
+        v-for="item in childRoute"
+        :key="item.path"
+        :index="item.path"
+      >
+        <svg-icon :icon-class="item.meta.icon"></svg-icon>
+        <span slot="title">{{ item.meta.title }}</span>
       </el-menu-item>
     </el-menu>
   </div>
@@ -63,10 +35,14 @@ export default {
   name: 'menuView',
   components: {},
   data() {
-    return {}
+    return {
+      childRoute: JSON.parse(localStorage.getItem('Routes'))
+    }
   },
   created() {},
-  mounted() {},
+  mounted() {
+    console.log(this.childRoute)
+  },
   methods: {}
 }
 </script>

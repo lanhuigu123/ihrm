@@ -19,9 +19,8 @@
  * 第八步: 导出axios实例
  */
 
-let loadingInstance
 import axios from 'axios'
-import { MessageBox, Loading } from 'element-ui'
+import { MessageBox } from 'element-ui'
 import DEFAULTSTATUS from './default'
 import { getToken, removeToken } from './auth'
 import router from '../router'
@@ -45,11 +44,11 @@ instance.interceptors.request.use(
      * TODO: 封装token
      */
     config.headers.Authorization = 'Bearer ' + getToken()
-    loadingInstance = Loading.service({
-      fullscreen: false,
-      text: '加载中...',
-      target: '.el-main'
-    })
+    // loadingInstance = Loading.service({
+    //   fullscreen: false,
+    //   text: '加载中...',
+    //   target: '.el-main'
+    // })
 
     return config
   },
@@ -59,7 +58,7 @@ instance.interceptors.request.use(
 )
 instance.interceptors.response.use(
   (response) => {
-    loadingInstance.close()
+    // loadingInstance.close()
     if (response.data && response.data.code === 10002) {
       removeToken()
       router.push({
@@ -71,7 +70,7 @@ instance.interceptors.response.use(
   (error) => {
     let title = ''
     let message = ''
-    loadingInstance.close()
+    // loadingInstance.close()
     if (error && error.response) {
       /**后端返回的报错的信息 */
       message = error.response.data.message

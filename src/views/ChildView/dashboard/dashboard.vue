@@ -55,9 +55,7 @@ export default {
       dateValue: new Date()
     }
   },
-  created() {
-    // this.getUser()
-  },
+  created() {},
   mounted() {
     this.initChart()
   },
@@ -68,14 +66,11 @@ export default {
         this.getUserInfo(res.data.userId)
       })
     },
-    getUserInfo(id) {
-      API.getEmployeeInfoApi({
-        id: id
-      }).then((res) => {
-        console.log(res)
-        this.data = res.data
-      })
-    },
+    // getUserInfo() {
+    //   API.getUserInfoApi().then((res) => {
+    //     console.log(res)
+    //   })
+    // },
     initChart() {
       var chartDom = document.getElementById('echartsBox')
       console.log(chartDom)

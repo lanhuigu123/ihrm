@@ -50,7 +50,8 @@ import {
   TabPane,
   Pagination,
   Switch,
-  Image
+  Image,
+  Upload
 } from 'element-ui'
 
 Vue.config.productionTip = false
@@ -88,6 +89,7 @@ Vue.use(TabPane)
 Vue.use(Pagination)
 Vue.use(Switch)
 Vue.use(Image)
+Vue.use(Upload)
 
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$msg = Message

@@ -8,10 +8,21 @@
           >
         </div>
         <div class="right">
-          <el-button type="danger">简单表头导出</el-button>
-          <el-button type="info">复杂表头导出</el-button>
-          <el-button type="success">excel导出</el-button>
-          <el-button type="primary">新增员工</el-button>
+          <el-button type="danger" @click="outExcel">简单表头导出</el-button>
+          <el-button type="info" @click="outExcel">复杂表头导出</el-button>
+          <el-upload
+            style="display: inline-block; margin: 0 10px"
+            ref="uploadRef"
+            class="upload-demo"
+            action=""
+            accept=".csv"
+            :auto-upload="false"
+            :show-file-list="false"
+            :on-change="handleUploadChange"
+          >
+            <el-button type="success">excel导出</el-button>
+          </el-upload>
+          <el-button type="primary" disabled>新增员工</el-button>
         </div>
       </div>
     </el-card>
@@ -87,6 +98,8 @@
 
 <script>
 import * as API from '@/api'
+import * as XLSX from 'xlsx'
+import { readFile, xlsx } from '../../../utils/xlsx.js'
 export default {
   name: 'employeesView',
   data() {
@@ -94,10 +107,26 @@ export default {
       total: 0,
       Totaldata: [],
       page: 1,
-      size: 10
+      size: 10,
+      listHander: {
+        name: '姓名',
+        mobile: '手机号',
+        workNumber: '工号',
+        formOfEmployment: '聘用形式',
+        departmentName: '部门',
+        correctionTime: '入职时间',
+        enableState: '账户状态'
+      }
     }
   },
   methods: {
+    async handleUploadChange(file) {
+      let dataBinary = await readFile(file.raw)
+      let workBook = XLSX.read(dataBinary, { type: 'binary', cellDates: true })
+      let workSheet = workBook.Sheets[workBook.SheetNames[0]]
+      const data = XLSX.utils.sheet_to_json(workSheet)
+      console.log(data) //这里已经能拿到转换后的json
+    },
     formatter(row) {
       return row.address
     },
@@ -131,6 +160,12 @@ export default {
     currentChange(val) {
       this.page = val
       this.getEmployee()
+    },
+    outExcel() {
+      // this.jsonData是要导出的数据内容（表格里的内容），
+      // this.listHander对应要导出内容的表头
+      // 学生：指向的是excel文件名
+      xlsx(this.Totaldata, this.listHander, '员工管理表格')
     }
   },
 
