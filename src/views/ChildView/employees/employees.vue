@@ -109,7 +109,7 @@ export default {
       page: 1,
       size: 10,
       listHander: {
-        name: '姓名',
+        username: '姓名',
         mobile: '手机号',
         workNumber: '工号',
         formOfEmployment: '聘用形式',
