@@ -14,6 +14,28 @@ import i18n from './language/index'
 ElementLocale.i18n((key, value) => i18n.t(key, value))
 // 把i18注册到Vue实例上
 
+const permissions = [
+  'permission:simple-derivation',
+  'permission:complex-derivation',
+  'permission:lead-into',
+  'permission:add'
+]
+
+Vue.directive('isShow', {
+  bind: function (el, binding) {
+    console.log(el)
+    console.log(binding)
+    const permission = binding.value
+    console.log(permission)
+    console.log(permissions.includes(permission))
+    if (permissions.includes(permission)) {
+      el.style.display = ''
+    } else {
+      el.style.display = 'none'
+    }
+  }
+})
+
 import '@/icons'
 import {
   Button,

@@ -8,8 +8,18 @@
           >
         </div>
         <div class="right">
-          <el-button type="danger" @click="outExcel">简单表头导出</el-button>
-          <el-button type="info" @click="outExcel">复杂表头导出</el-button>
+          <el-button
+            v-isShow="'permission:simple-derivation'"
+            type="danger"
+            @click="outExcel"
+            >简单表头导出</el-button
+          >
+          <el-button
+            v-isShow="'permission:complex-derivation'"
+            type="info"
+            @click="outExcel"
+            >复杂表头导出</el-button
+          >
           <el-upload
             style="display: inline-block; margin: 0 10px"
             ref="uploadRef"
@@ -20,9 +30,13 @@
             :show-file-list="false"
             :on-change="handleUploadChange"
           >
-            <el-button type="success">excel导出</el-button>
+            <el-button v-isShow="'permission:lead-into'" type="success"
+              >excel导入</el-button
+            >
           </el-upload>
-          <el-button type="primary" disabled>新增员工</el-button>
+          <el-button v-isShow="'permission:add'" type="primary" disabled
+            >新增员工</el-button
+          >
         </div>
       </div>
     </el-card>
@@ -100,6 +114,7 @@
 import * as API from '@/api'
 import * as XLSX from 'xlsx'
 import { readFile, xlsx } from '../../../utils/xlsx.js'
+
 export default {
   name: 'employeesView',
   data() {

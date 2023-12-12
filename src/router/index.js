@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../layout/index.vue'
 import store from '@/store'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
 store.dispatch('getUserInfo')
 Vue.use(VueRouter)
 
@@ -111,6 +114,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  NProgress.start()
   setTimeout(() => {
     // 没有处理的初始化动态路由信息
     let initDynamic = store.state.menuList.routeMenu
@@ -137,6 +141,10 @@ router.beforeEach((to, from, next) => {
     localStorage.setItem('Routes', JSON.stringify(Dynamic))
   }, 1000)
   next()
+})
+
+router.afterEach(() => {
+  NProgress.done()
 })
 
 export default router
